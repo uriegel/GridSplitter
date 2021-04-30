@@ -38,7 +38,7 @@ template.innerHTML = `
         }
     </style>
     <div id="splitterGrid">
-        <div class="slot">
+        <div class="slot" id="first">
             <slot name="first"></slot>
         </div>
         <div id="splitter"></div>
@@ -61,13 +61,59 @@ class GridSplitter extends HTMLElement {
         super()
         this.attachShadow({ mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
-        this.splitter = this.shadowRoot.getElementById("splitterGrid")
+        this.splitterGrid = this.shadowRoot.getElementById("splitterGrid")
+        this.splitter = this.shadowRoot.getElementById("splitter")
+        this.first = this.shadowRoot.getElementById("first")
         this.second = this.shadowRoot.getElementById("second")
         if (this.attributes.orientation == "VERTICAL")
-            this.splitter.classList.add("vertical") 
+            this.splitterGrid.classList.add("vertical") 
     }
 
     connectedCallback() {
+        this.splitter.addEventListener("mousedown", evt => {
+            if (evt.which != 1) 
+    			return
+            const isVertical = this.getAttribute("orientation") == "VERTICAL"
+		    const size1 = isVertical ? this.first.offsetHeight : this.first.offsetWidth
+		    const size2 = isVertical ? this.second.offsetHeight : this.second.offsetWidth
+		    const initialPosition = isVertical ? evt.pageY : evt.pageX		
+
+            const onmousemove = evt => {
+                let delta = (isVertical ? evt.pageY : evt.pageX) - initialPosition
+                if (delta < 10 - size1)
+                    delta = 10 - size1
+                if (delta > (isVertical ? this.first.parentElement.offsetHeight : this.first.parentElement.offsetWidth) - 10 - size1 - 6)
+                    delta = (isVertical ? this.first.parentElement.offsetHeight : this.first.parentElement.offsetWidth) - 10 - size1 - 6
+
+                const newSize1 = size1 + delta
+                const newSize2 = size2 - delta
+
+                const procent2 = newSize2 / (newSize2 + newSize1 + 
+                    (isVertical ? this.splitter.offsetHeight : this.splitter.offsetWidth)) * 100
+
+                const size = `0 0 ${procent2}%` 
+                this.second.style.flex = size
+            // if (positionChanged)
+            // positionChanged()
+
+                evt.stopPropagation()
+                evt.preventDefault()
+            }
+
+            const onmouseup = evt => {
+                window.removeEventListener('mousemove', onmousemove, true)
+                window.removeEventListener('mouseup', onmouseup, true)
+
+                evt.stopPropagation()
+                evt.preventDefault()
+            }
+
+            window.addEventListener('mousemove', onmousemove, true)
+            window.addEventListener('mouseup', onmouseup, true)
+
+            evt.stopPropagation()
+            evt.preventDefault()        		
+        })
     }
 
     static get observedAttributes() {
@@ -78,15 +124,15 @@ class GridSplitter extends HTMLElement {
         switch (attributeName) {
             case "orientation":
                 if (newValue == "VERTICAL") 
-                    this.splitter.classList.add("vertical") 
+                    this.splitterGrid.classList.add("vertical") 
                 else 
-                    this.splitter.classList.remove("vertical") 
+                    this.splitterGrid.classList.remove("vertical") 
                 break
             case "secondinvisible":
                 if (newValue == "true") 
-                    this.splitter.classList.add("secondInvisible")
+                    this.splitterGrid.classList.add("secondInvisible")
                 else
-                    this.splitter.classList.remove("secondInvisible")
+                    this.splitterGrid.classList.remove("secondInvisible")
                 break
         }
     }

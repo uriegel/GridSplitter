@@ -29,7 +29,7 @@ themeChooser.onchange = () => {
             break
         case 2: 
             changeTheme("themeAdwaitaDark")
-        break
+            break
     }
 }
 
