@@ -1,8 +1,10 @@
 import './GridSplitter.js'
+import { VERTICAL, HORIZONTAL } from './GridSplitter.js'
 
 const themeChooser = document.getElementById("themeChooser")
 const gridChooser = document.getElementById("gridChooser")
-const table = document.querySelector('virtual-table-component')
+const secondInvisible = document.getElementById("secondInvisible")
+const splitter = document.querySelector('grid-splitter')
 
 themeChooser.onchange = () => {
     const changeTheme = theme => {
@@ -34,10 +36,14 @@ themeChooser.onchange = () => {
 gridChooser.onchange = () => {
     switch (gridChooser.selectedIndex) {
         case 0: 
+            splitter.setAttribute("orientation", HORIZONTAL)
             break
         case 1: 
+            splitter.setAttribute("orientation", VERTICAL)
             break
     }
 }
+
+secondInvisible.onchange = () => splitter.setAttribute("secondInvisible", secondInvisible.checked)
 
 // TODO: set vertical attribute
