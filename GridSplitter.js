@@ -1,6 +1,11 @@
 const template = document.createElement('template')
 template.innerHTML = `  
     <style>
+        :host {
+            --gridsplitter-grip-color : gray;
+            --gridsplitter-grip-hover-color : rgb(94, 94, 94);
+            --gridsplitter-grip-active-color : rgb(61, 61, 61);
+        }
         #splitterGrid {
             display:flex;
             flex-grow: 1;
@@ -10,17 +15,33 @@ template.innerHTML = `
             flex-grow: 1;
             display: flex;
         }     
+        #splitter {
+            flex: 0 0 6px;
+            cursor: ew-resize;
+            transition: background-color 0.4s;
+            background-color: var(--gridsplitter-grip-color);
+        }
+        #splitter:hover {
+            background-color: var(--gridsplitter-grip-hover-color);
+        }
+        #splitter:active {
+            background-color: var(--gridsplitter-grip-active-color);
+        }        
         #splitterGrid.vertical {
             flex-direction: column;
         }
-        .invisible {
+        .secondInvisible #second, .secondInvisible #splitter {
             display: none;
+        }
+        .vertical #splitter {
+            cursor: ns-resize;
         }
     </style>
     <div id="splitterGrid">
         <div class="slot">
             <slot name="first"></slot>
         </div>
+        <div id="splitter"></div>
         <div class="slot" id="second">
             <slot name="second"></slot>
         </div>
@@ -63,9 +84,9 @@ class GridSplitter extends HTMLElement {
                 break
             case "secondinvisible":
                 if (newValue == "true") 
-                    this.second.classList.add("invisible")
+                    this.splitter.classList.add("secondInvisible")
                 else
-                    this.second.classList.remove("invisible")
+                    this.splitter.classList.remove("secondInvisible")
                 break
         }
     }
