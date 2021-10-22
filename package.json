@@ -1,0 +1,27 @@
+{
+  "name": "grid-splitter",
+  "version": "0.0.1",
+  "description": "A resizable grid splitter Web Component",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uriegel/grid-splitter.git"
+  },
+  "keywords": [
+    "javascript",
+    "web-components"
+  ],
+  "author": "Uwe Riegel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uriegel/grid-splitter/issues"
+  },
+  "homepage": "https://github.com/uriegel/grid-splitter#readme"
+}
