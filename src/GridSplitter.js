@@ -45,9 +45,6 @@ template.innerHTML = `
     </div>
 ` 
 
-export var HORIZONTAL = "HORIZONTAL"
-export var VERTICAL = "VERTICAL"
-
 /**
  * @typedef {Object} Column
  * @property {string} title Title of column
@@ -71,7 +68,7 @@ class GridSplitter extends HTMLElement {
         this.splitter = this.shadowRoot.getElementById("splitter")
         this.first = this.shadowRoot.getElementById("first")
         this.second = this.shadowRoot.getElementById("second")
-        if (this.attributes.orientation == "VERTICAL")
+        if (this.attributes.orientation == "vertical")
             this.splitterGrid.classList.add("vertical") 
     }
 
@@ -79,7 +76,7 @@ class GridSplitter extends HTMLElement {
         this.splitter.addEventListener("mousedown", evt => {
             if (evt.which != 1) 
     			return
-            const isVertical = this.getAttribute("orientation") == "VERTICAL"
+            const isVertical = this.getAttribute("orientation") == "vertical"
 		    const size1 = isVertical ? this.first.offsetHeight : this.first.offsetWidth
 		    const size2 = isVertical ? this.second.offsetHeight : this.second.offsetWidth
 		    const initialPosition = isVertical ? evt.pageY : evt.pageX		
@@ -137,7 +134,7 @@ class GridSplitter extends HTMLElement {
     attributeChangedCallback(attributeName, oldValue, newValue) {
         switch (attributeName) {
             case "orientation":
-                if (newValue == "VERTICAL") 
+                if (newValue == "vertical") 
                     this.splitterGrid.classList.add("vertical") 
                 else 
                     this.splitterGrid.classList.remove("vertical") 
