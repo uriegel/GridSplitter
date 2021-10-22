@@ -1,6 +1,6 @@
 {
   "name": "grid-splitter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A resizable grid splitter Web Component",
   "main": "dist/index.js",
   "module": "src/index.js",
