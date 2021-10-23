@@ -8,6 +8,10 @@
   "directories": {
     "src": "src"
   },
+  "scripts": {
+    "publish test": "npm publish --dry-run",
+    "publish": "npm publish"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uriegel/grid-splitter.git"
@@ -21,5 +25,5 @@
   "bugs": {
     "url": "https://github.com/uriegel/grid-splitter/issues"
   },
-  "homepage": "https://github.com/uriegel/grid-splitter#readme",
+  "homepage": "https://github.com/uriegel/grid-splitter#readme"
 }
