@@ -1,4 +1,5 @@
 import '../src/GridSplitter.js'
+import { HORIZONTAL, VERTICAL } from '../src/GridSplitter.js'
 
 const themeChooser = document.getElementById("themeChooser")
 const gridChooser = document.getElementById("gridChooser")
@@ -32,10 +33,10 @@ themeChooser.onchange = () => {
 gridChooser.onchange = () => {
     switch (gridChooser.selectedIndex) {
         case 0: 
-            splitter.setAttribute("orientation", "horizontal")
+            splitter.setAttribute("orientation", HORIZONTAL)
             break
         case 1: 
-            splitter.setAttribute("orientation", "vertical")
+            splitter.setAttribute("orientation", VERTICAL)
             break
     }
 }
