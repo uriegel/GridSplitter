@@ -1,1 +1,1 @@
-export * from './src/GridSplitter.js'
+export * from './GridSplitter.js'
