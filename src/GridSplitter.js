@@ -107,6 +107,8 @@ export class GridSplitter extends HTMLElement {
 
                     const size = `0 0 ${procent2}%` 
                     this.second.style.flex = size
+                    this.dispatchEvent(new CustomEvent('position-changed'))
+
                     // if (positionChanged)
                     // positionChanged()
                 }
