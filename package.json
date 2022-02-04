@@ -1,6 +1,6 @@
 {
   "name": "grid-splitter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "A resizable grid splitter Web Component",
   "main": "src/index.js",
@@ -9,8 +9,10 @@
     "src": "src"
   },
   "scripts": {
-    "do publish test": "npm publish --dry-run",
-    "do publish": "npm publish"
+    "typescript": "tsc -p typescript",
+    "typescript-test": "tsc -p test",
+    "do publish test": "npm run typescript && npm publish --dry-run",
+    "do publish": "npm run typescript && npm publish"
   },
   "repository": {
     "type": "git",
@@ -25,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/uriegel/grid-splitter/issues"
   },
-  "homepage": "https://github.com/uriegel/grid-splitter#readme"
+  "homepage": "https://github.com/uriegel/grid-splitter#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
 }
